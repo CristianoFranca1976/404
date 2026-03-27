@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Cristiano Franca" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="description"
+      content="Pagina exclusivas 404 para meus websites"
+    />
+    <link rel="shortcut icon" href="https://i.ibb.co/wFjf4cPp/error-404.png" type="image/x-icon">
+    <title>404 - Perdido no Espaço</title>
+    <style>
+      /* CSS - Estilo e Animações */
+      @import url("https://fonts.googleapis.com");
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #0b0d17;
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+
+      .container {
+        text-align: center;
+        z-index: 10;
+      }
+
+      h1 {
+        font-size: 12rem;
+        margin: 0;
+        line-height: 1;
+        background: linear-gradient(to bottom, #fff, #444);
+        background-size: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+      }
+
+      p {
+        font-size: 1.5rem;
+        margin-top: -20px;
+        opacity: 0.8;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 12px 30px;
+        background: #ff4757;
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: bold;
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease;
+      }
+
+      .btn:hover {
+        transform: scale(1.1);
+        background: #ff6b81;
+      }
+
+      /* O Astronauta */
+      .astronaut {
+        position: absolute;
+        width: 150px;
+        pointer-events: none;
+        transition: transform 0.1s ease-out;
+        z-index: 5;
+      }
+
+      /* Estrelas de fundo */
+      .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.5;
+        animation: twinkle var(--duration) infinite;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>404</h1>
+      <p>Houston, temos um problema. Esta página não existe!</p>
+      <a href="javascript:history.back()" class="btn">Voltar para onde estava</a>
+    </div>
+
+    <!-- SVG do Astronauta -->
+    <svg class="astronaut" viewBox="0 0 512 512">
+      <path
+        fill="#e0e0e0"
+        d="M376 192c0-61.856-50.144-112-112-112s-112 50.144-112 112v72c0 9.424 2.272 18.32 6.272 26.24L128 352h256l-30.272-61.76c4-7.92 6.272-16.816 6.272-26.24v-72z"
+      />
+      <path fill="#333" d="M192 192h128v48H192z" />
+      <circle fill="#ff4757" cx="256" cy="310" r="20" />
+    </svg>
+
+    <script>
+      // Criar estrelas aleatórias
+      const body = document.body;
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        const size = Math.random() * 3 + "px";
+        star.style.width = size;
+        star.style.height = size;
+        star.style.top = Math.random() * 100 + "vh";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.setProperty("--duration", Math.random() * 3 + 2 + "s");
+        body.appendChild(star);
+      }
+
+      // Movimento do Astronauta seguindo o rato
+      const astronaut = document.querySelector(".astronaut");
+      document.addEventListener("mousemove", (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+
+        // Suavizar o movimento
+        astronaut.style.left = x - 75 + "px";
+        astronaut.style.top = y - 75 + "px";
+
+        // Rotação leve baseada no movimento lateral
+        const rotate = (x - window.innerWidth / 2) / 20;
+        astronaut.style.transform = `rotate(${rotate}deg)`;
+      });
+    </script>
+  </body>
+</html>
